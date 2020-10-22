@@ -17,6 +17,10 @@ ENV APP_ENV=${app_env:-"test"} \
     UUID_VERSION=1.1.0 \
     IGBINARY_VERSION=3.1.5 \
     COMPOSER_ALLOW_SUPERUSER=1 \
+    LIBRARY_CONTENT="/sctx->cb.no_separation = 0;" \
+    IMPL_CONTENT="/z_cb->no_separation = 0;" \
+    COMMANDS_CONTENT="subscribeContext *sctx = emalloc(sizeof(subscribeContext));" \
+    REPLACE_CONTENT="subscribeContext *sctx = ecalloc(1, sizeof(*sctx));" \
     WORK_DIR="/opt/www"
 
 COPY . ${WORK_DIR}/
@@ -66,7 +70,12 @@ RUN set -ex \
         cd redis \
         && phpize \
         && ./configure \
-        && sh ${WORK_DIR}/changeRedis.sh \
+        && echo -e "\033[42;37m 开始执行修改redis扩展 \033[0m\n" \
+        && sed -i "${LIBRARY_CONTENT}/d" ${WORK_DIR}/redis/cluster_library.c \
+        && sed -i "${LIBRARY_CONTENT}/d" ${WORK_DIR}/redis/library.c \
+        && sed -i "${IMPL_CONTENT}/d" ${WORK_DIR}/redis/redis_array_impl.c \
+        && sed -i "s/${COMMANDS_CONTENT}/${REPLACE_CONTENT}/g" ${WORK_DIR}/redis/redis_commands.c \
+        && echo -e "\033[42;37m 修改redis扩展结束 \033[0m\n" \
         && make -j$(nproc) \
         && make install \
         && cd .. \
@@ -114,5 +123,6 @@ RUN set -ex \
        postgresql oniguruma libzip m4 autoconf util-linux \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
+
 
 
