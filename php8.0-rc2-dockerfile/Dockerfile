@@ -1,4 +1,4 @@
-FROM php:8.0-rc2-fpm
+FROM php:rc-fpm-alpine3.12
 
 LABEL maintainer="sheletao <sheletao@sina.cn>" version="2.0"
 
