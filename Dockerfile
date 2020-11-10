@@ -1,4 +1,4 @@
-FROM php:7.4.10-zts-alpine3.12
+FROM php:7.4.12-zts-alpine3.12
 
 LABEL maintainer="sheletao <sheletao@sina.cn>" version="2.0"
 
@@ -12,10 +12,10 @@ ARG work_user=www-data
 # default APP_ENV = test
 ENV APP_ENV=${app_env:-"test"} \
     TIMEZONE=${timezone:-"Asia/Shanghai"} \
-    PHPREDIS_VERSION=5.3.1 \
-    SWOOLE_VERSION=4.5.5 \
+    PHPREDIS_VERSION=5.3.2 \
+    SWOOLE_VERSION=4.5.7 \
     UUID_VERSION=1.1.0 \
-    IGBINARY_VERSION=3.1.5 \
+    IGBINARY_VERSION=3.1.6 \
     COMPOSER_ALLOW_SUPERUSER=1
 
 # Libs -y --no-install-recommends
@@ -35,7 +35,7 @@ RUN set -ex \
 # Install composer
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && composer self-update --clean-backups \
+    && composer self-update --2 --clean-backups \
 # Install igbinary extension
     && wget https://pecl.php.net/get/igbinary-${IGBINARY_VERSION}.tgz -O igbinary.tgz \
     && mkdir -p igbinary \
