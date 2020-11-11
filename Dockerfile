@@ -24,7 +24,7 @@ RUN set -ex \
     && apk update \
     && apk add --no-cache \
      curl wget zip unzip less procps lsof tcpdump gcc g++ pkgconf util-linux make libpng \
-     openssl net-tools icu icu-dev zlib zlib-dev libpng-dev libuuid util-linux-dev \
+     openssl net-tools icu icu-dev zlib zlib-dev libpng-dev libuuid util-linux-dev git \
      postgresql postgresql-dev oniguruma oniguruma-dev libzip libzip-dev m4 autoconf \
     && echo "#!/bin/sh" > /usr/local/bin/ll \
     && echo "ls -l \$*" >> /usr/local/bin/ll \
