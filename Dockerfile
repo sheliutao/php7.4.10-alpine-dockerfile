@@ -96,6 +96,7 @@ RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "${TIMEZONE}" > /etc/timezone \
     && echo "[Date]\ndate.timezone=${TIMEZONE}" > /usr/local/etc/php/conf.d/timezone.ini \
+    && mkdir ~/.ssh \
 # Clear dev deps
     && apk del \
        wget zip unzip less procps lsof tcpdump gcc g++ \
