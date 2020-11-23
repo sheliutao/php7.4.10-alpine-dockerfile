@@ -46,6 +46,7 @@ RUN set -ex \
         && ./configure \
         && make -j$(nproc) \
         && make install \
+        && cd .. \
         ) \
     && rm -r igbinary \
     && docker-php-ext-enable igbinary \
@@ -60,6 +61,7 @@ RUN set -ex \
         && ./configure \
         && make -j$(nproc) \
         && make install \
+        && cd .. \
         ) \
     && rm -r redis \
     && docker-php-ext-enable redis \
@@ -74,6 +76,7 @@ RUN set -ex \
         && ./configure \
         && make -j$(nproc) \
         && make install \
+        && cd .. \
         ) \
     && rm -r uuid \
     && docker-php-ext-enable uuid \
@@ -88,6 +91,7 @@ RUN set -ex \
         && ./configure --enable-mysqlnd --enable-sockets --enable-openssl --enable-http2 \
         && make -j$(nproc) \
         && make install \
+        && cd .. \
     ) \
     && rm -r swoole \
     && docker-php-ext-enable swoole \
