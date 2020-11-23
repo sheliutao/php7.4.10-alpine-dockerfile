@@ -15,8 +15,7 @@ ENV APP_ENV=${app_env:-"test"} \
     PHPREDIS_VERSION=5.3.2 \
     SWOOLE_VERSION=4.5.7 \
     UUID_VERSION=1.1.0 \
-    IGBINARY_VERSION=3.1.6 \
-    COMPOSER_ALLOW_SUPERUSER=1
+    IGBINARY_VERSION=3.1.6
 
 # Libs -y --no-install-recommends
 RUN set -ex \
