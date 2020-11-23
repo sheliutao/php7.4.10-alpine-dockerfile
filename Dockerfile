@@ -88,7 +88,7 @@ RUN set -ex \
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-mysqlnd --enable-sockets --enable-openssl --enable-http2 \
+        && ./configure --enable-openssl --enable-http2 \
         && make -j$(nproc) \
         && make install \
         && cd .. \
